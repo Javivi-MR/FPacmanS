@@ -113,3 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidad: 100
   valorHerida: 1
+  gun1: {fileID: 4995194532399614523, guid: e40341f57a0d9224bb11917dfaf742a8, type: 3}
+  gun2: {fileID: 4932439495008264103, guid: 86de67f03ff31be47b10d0de482a9f9c, type: 3}
+  gun3: {fileID: 1163663961260577155, guid: 0d289ecf722c1ff44a9788efa4dc122d, type: 3}
+  gun4: {fileID: 8435682697151514252, guid: 23f1e8c0a5d3a904d86d7741225f5ed6, type: 3}

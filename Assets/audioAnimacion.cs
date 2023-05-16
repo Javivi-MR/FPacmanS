@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class audioAnimacion : MonoBehaviour
 {
+    public AudioClip audioClip;
+    public Animation animacion;
     private AudioSource audioSource;
-    private Animation animacion;
-    // Start is called before the first frame update
+
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        animacion = GetComponent<Animation>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = audioClip;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             audioSource.Play();
             animacion.wrapMode = WrapMode.Once;
