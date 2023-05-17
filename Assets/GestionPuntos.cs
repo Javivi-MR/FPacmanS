@@ -32,9 +32,11 @@ public class GestionPuntos : MonoBehaviour
     public AudioClip audioGun4;
     public Animation animationgun4;
     private AudioSource audioSGun4;
+    public AudioClip comePuntos;
+    private AudioSource audioSComePuntos;
 
 
-    private float  proximoDisparo = 0.0f;
+    private float  proximoDisparo = 0.2f;
     private float tiempoDisparo = 0.3f;
 
     public GameObject Bala;
@@ -55,6 +57,9 @@ public class GestionPuntos : MonoBehaviour
         audioSGun3.clip = audioGun3;
         audioSGun4 = gameObject.AddComponent<AudioSource>();
         audioSGun4.clip = audioGun4;
+        audioSComePuntos = gameObject.AddComponent<AudioSource>();
+        audioSComePuntos.clip = comePuntos;
+
         guncamera.SetActive(false);
     }
 
@@ -63,12 +68,27 @@ public class GestionPuntos : MonoBehaviour
     {
         if(puntos == 150)
         {
-            SceneManager.LoadScene("Nivel 2",LoadSceneMode.Single);
+            //if the actual scene is Nivel 1 then load Nivel 2
+            if(SceneManager.GetActiveScene().name == "Nivel 1")
+            {
+                SceneManager.LoadScene("Nivel 2",LoadSceneMode.Single);
+            }
+            //if the actual scene is Nivel 2 then load Nivel 3
+            if(SceneManager.GetActiveScene().name == "Nivel 2")
+            {
+                SceneManager.LoadScene("Nivel 3",LoadSceneMode.Single);
+            }
+            //if the actual scene is Nivel 3 then load Nivel 4
+            if(SceneManager.GetActiveScene().name == "Nivel 3")
+            {
+                SceneManager.LoadScene("You Win",LoadSceneMode.Single);
+            }
         }
 
         if(Time.time >= proximoDisparo && Input.GetMouseButtonDown(0) && superPuntos > 0)
         {
             proximoDisparo = Time.time + tiempoDisparo;
+
             GameObject nuevaBala = Instantiate(Bala, salida.position, salida.rotation);
             switch(superPuntos)
             {
@@ -105,6 +125,7 @@ public class GestionPuntos : MonoBehaviour
             Debug.Log("Puntos: " + puntos);
             other.enabled = false; // Desactivar el Collider antes de destruir el objeto
             Destroy(other.gameObject);
+            audioSComePuntos.Play();
             textoPuntos.text = "Puntos obtenidos: " + puntos + "/150";
         }
         if(other.gameObject.tag == "SuperDot")
@@ -124,14 +145,20 @@ public class GestionPuntos : MonoBehaviour
                 case 2:
                     gun1.SetActive(false);
                     gun2.SetActive(true);
+                    proximoDisparo = 11.2f;
+                    tiempoDisparo = 0.2f;
                     break;
                 case 3:
                     gun2.SetActive(false);
                     gun3.SetActive(true);
+                    proximoDisparo = 0.2f;
+                    tiempoDisparo = 0.2f;
                     break;
                 case 4:
                     gun3.SetActive(false);
                     gun4.SetActive(true);
+                    proximoDisparo = 0.6f;
+                    tiempoDisparo = 0.2f;
                     break;
             }
         }
