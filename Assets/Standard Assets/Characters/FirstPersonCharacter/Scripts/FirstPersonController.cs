@@ -237,6 +237,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void RotateView()
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
+            m_CharacterController.transform.Rotate(0, m_MouseLook.XSensitivity * Input.GetAxis("Mouse X"), 0);
         }
 
 
