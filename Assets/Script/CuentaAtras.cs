@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,14 @@ public class CuentaAtras : MonoBehaviour
         btn.onClick.AddListener(Pulsado); //Añado el evento al boton
         contar = false; //Inicializo contar
         mostrar = 3; //Inicializo mostrar
+    }
+    
+    // Update is called once per frame
+    private void Update() {
+        if(Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame) //Si se pulsa el boton start del mando
+        {
+            Pulsado(); //Llamo a la funcion pulsado
+        }
     }
 
     private void FixedUpdate() { 
